@@ -1,0 +1,12 @@
+- name: Add/Update Windows Firewall Rule
+  hosts: all
+  gather_facts: no
+
+  tasks:
+  - name: Add/Update Windows Firewall Rule
+    win_firewall_rule:
+      name: "{{ rule_name }}"
+      description: "{{ rule_dsc }}"
+      enabled: "{{ rule_enabled }}"
+      localport: "{{ port_number }}"
+      protocol: "{{ rule_protocol }}"
