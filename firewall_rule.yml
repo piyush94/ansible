@@ -10,3 +10,4 @@
       enabled: "{{ rule_enabled }}"
       localport: "{{ port_number }}"
       protocol: "{{ rule_protocol }}"
+      direction: "{{ rule_direction }}"
