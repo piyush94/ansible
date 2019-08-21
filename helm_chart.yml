@@ -1,6 +1,6 @@
 - name: Add/Update Helm Chart Deployment
   hosts: all
-  gather_facts: no
+  gather_facts: yes
 
   tasks:
   - name: Install EPEL Release and python-pip
