@@ -1,29 +1,24 @@
 - name: Add/Update Helm Chart Deployment
   hosts: all
-  gather_facts: yes
+  gather_facts: no
 
   tasks:
-  - name: Install EPEL Release and python-pip
-    yum:
-      name:
-        - https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
-        - python-pip
-      enablerepo: "*"
-      state: present
-    when: ansible_facts['os_family'] == "RedHat"
+  - name: Add chart-repo ca authority
+    shell: ex +'g/BEGIN CERTIFICATE/,/END CERTIFICATE/p' <(echo | openssl s_client -showcerts -connect {{ chart_repo }}:443) -scq > /usr/local/share/ca-certificates/{{ chart_repo }}.crt
 
-  - name: Install python-pip
-    apt:
-      name: python-pip
-      state: present
-    when: ansible_facts['os_family'] == "Debian"
+  - name: Update ca authority
+    command: update-ca-certitificates
 
-  - name: Helm Python Module
-    pip:
-      name: pyhelm
+  - name: Add helm repo
+    command: helm repo add {{ helm_repo }} {{ chart_repo }}/{{ repo_path }}
+    when: private_repo == 0
+
+  - name: Add helm repo
+    command: helm repo add --username {{ repo_username }} --password {{ repo_password }} {{ helm_repo }} {{ chart_repo }}/{{ repo_path }}
+    when: private_repo == 1
 
   - name: Deploy Helm Chart
-    command: helm install {{ chart_repo }}/{{ chart_name }} --version {{ chart_version }} --namespace {{ kube_namespace }} --name {{ deployment_name }} --replace
+    command: helm install {{ helm_repo }}/{{ chart_name }} --version {{ chart_version }} --namespace {{ kube_namespace }} --name {{ deployment_name }} --replace
     # helm:
     #   host: "{{ tiller_host }}"
     #   chart:
