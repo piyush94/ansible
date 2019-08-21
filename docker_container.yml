@@ -1,0 +1,14 @@
+- name: Add/Update Windows Firewall Rule
+  hosts: all
+  gather_facts: no
+
+  tasks:
+  - name: Add/Update Docker Container
+    docker_container:
+      name: "{{ container_name }}"
+      image: "{{ image_name }}"
+      state: "started"
+      pull: "true"
+      restart_policy: "{{ restart_policy }}"
+      ports: "{{ port_map }}"
+      volumes: "{{ volume_map }}"
