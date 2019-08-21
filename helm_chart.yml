@@ -3,10 +3,6 @@
   gather_facts: yes
 
   tasks:
-  - name: Debug log
-    debug:
-      msg: "{{ lookup('env','SSL_CERT_DIR') }} is SSL CERT DIR"
-
   - name: Install EPEL Release and python-pip
     yum:
       name:
@@ -39,3 +35,9 @@
       state: present
       name: "{{ deployment_name }}"
       namespace: "{{ kube_namespace }}"
+    environment:
+      SSL_CERT_DIR: /usr/lib/ssl/certs
+
+   - name: Debug log
+    debug:
+      msg: "{{ lookup('env','SSL_CERT_DIR') }} is SSL CERT DIR"
