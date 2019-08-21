@@ -3,6 +3,20 @@
   gather_facts: no
 
   tasks:
+  - name: Install EPEL Release
+    yum:
+      name:
+        - https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+        - python-pip
+      enablerepo: "*"
+      state: present
+    when: ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat
+Enterprise Linux'
+
+  - name: Install Docker
+    command: curl -sLk https://releases.rancher.com/install-docker/{{ docker_version }}.sh | bash -
+    when: install_docker == "yes"
+
   - name: Docker Python Module
     pip:
       name: docker
