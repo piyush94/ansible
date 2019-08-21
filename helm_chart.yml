@@ -23,26 +23,20 @@
       name: pyhelm
 
   - name: Deploy Helm Chart
-    helm:
-      host: "{{ tiller_host }}"
-      chart:
-        name: "{{ chart_name }}"
-        version: "{{ chart_version }}"
-        source:
-          type: "repo"
-          location: "{{ chart_repo }}"
-          path: "{{ chart_path }}"
-      state: present
-      name: "{{ deployment_name }}"
-      namespace: "{{ kube_namespace }}"
-    environment:
-      SSL_CERT_DIR: /etc/ssl/certs
-      SSL_CERT_FILE: /etc/ssl/certs/ca-certificates.crt
-      REQUESTS_CA_BUNDLE: /etc/ssl/certs/ca-certificates.crt
-
-  # - name: Debug log
-  #   environment:
-  #     SSL_CERT_DIR: /usr/lib/ssl/certs
-  #     SSL_CERT_FILE: /usr/lib/ssl/certs/ca-certificates.crt
-  #   debug:
-  #     msg: "{{ lookup('env','SSL_CERT_DIR') }} {{ lookup('env','SSL_CERT_FILE') }} is SSL CERT DIR"
+    command: helm install {{ chart_repo }}/{{ chart_name }} --version {{ chart_version }} --namespace {{ kube_namespace }} --name {{ deployment_name }} --replace
+    # helm:
+    #   host: "{{ tiller_host }}"
+    #   chart:
+    #     name: "{{ chart_name }}"
+    #     version: "{{ chart_version }}"
+    #     source:
+    #       type: "repo"
+    #       location: "{{ chart_repo }}"
+    #       path: "{{ chart_path }}"
+    #   state: present
+    #   name: "{{ deployment_name }}"
+    #   namespace: "{{ kube_namespace }}"
+    # environment:
+    #   SSL_CERT_DIR: /etc/ssl/certs
+    #   SSL_CERT_FILE: /etc/ssl/certs/ca-certificates.crt
+    #   REQUESTS_CA_BUNDLE: /etc/ssl/certs/ca-certificates.crt
