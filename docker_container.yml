@@ -19,7 +19,9 @@
     when: ansible_facts['os_family'] == "Debian"
 
   - name: Install Docker
-    command: curl -sLk https://releases.rancher.com/install-docker/{{ docker_version }}.sh | bash -
+    shell: curl -sLk https://releases.rancher.com/install-docker/{{ docker_version }}.sh | bash -
+    args:
+      warn: no
     when: install_docker == "yes"
 
   - name: Docker Python Module
