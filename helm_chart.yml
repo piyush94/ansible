@@ -37,7 +37,11 @@
       namespace: "{{ kube_namespace }}"
     environment:
       SSL_CERT_DIR: /usr/lib/ssl/certs
+      SSL_CERT_FILE: /usr/lib/ssl/certs/ca-certificates.crt
 
   - name: Debug log
     debug:
-      msg: "{{ lookup('env','SSL_CERT_DIR') }} is SSL CERT DIR"
+      msg: "{{ lookup('env','SSL_CERT_DIR') }} {{ lookup('env','SSL_CERT_FILE') }} is SSL CERT DIR"
+    environment:
+      SSL_CERT_DIR: /usr/lib/ssl/certs
+      SSL_CERT_FILE: /usr/lib/ssl/certs/ca-certificates.crt
