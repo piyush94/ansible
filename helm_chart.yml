@@ -7,7 +7,7 @@
     shell: echo -n | openssl s_client -connect {{ chart_repo }}:443 | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' > /usr/local/share/ca-certificates/{{ chart_repo }}.cert
 
   - name: Update ca authority
-    shell: update-ca-certitificates
+    command: update-ca-certificates
 
   - name: Add helm repo
     command: helm repo add {{ helm_repo }} {{ chart_repo }}/{{ repo_path }}
