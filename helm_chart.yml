@@ -10,7 +10,7 @@
     command: update-ca-certificates
 
   - name: Add helm repo
-    command: helm repo add {{ helm_repo }} {{ chart_repo }}/{{ repo_path }}
+    command: helm repo add {{ helm_repo }} https://{{ chart_repo }}/{{ repo_path }}
     when: private_repo == 0
 
   - name: Add helm repo
