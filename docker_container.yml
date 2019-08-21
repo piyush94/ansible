@@ -22,7 +22,7 @@
     shell: curl -sLk https://releases.rancher.com/install-docker/{{ docker_version }}.sh | bash -
     args:
       warn: no
-    when: install_docker == yes
+    when: install_docker == 1
 
   - name: Docker Python Module
     pip:
