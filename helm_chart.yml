@@ -38,6 +38,6 @@
     environment:
       SSL_CERT_DIR: /usr/lib/ssl/certs
 
-   - name: Debug log
+  - name: Debug log
     debug:
       msg: "{{ lookup('env','SSL_CERT_DIR') }} is SSL CERT DIR"
