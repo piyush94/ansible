@@ -22,26 +22,26 @@
     pip:
       name: pyhelm
 
-  # - name: Deploy Helm Chart
-  #   helm:
-  #     host: "localhost"
-  #     chart:
-  #       name: "{{ chart_name }}"
-  #       version: "{{ chart_version }}"
-  #       source:
-  #         type: "repo"
-  #         location: "{{ chart_repo }}"
-  #         path: "{{ chart_path }}"
-  #     state: present
-  #     name: "{{ deployment_name }}"
-  #     namespace: "{{ kube_namespace }}"
-  #   environment:
-  #     SSL_CERT_DIR: /usr/lib/ssl/certs
-  #     SSL_CERT_FILE: /usr/lib/ssl/certs/ca-certificates.crt
-
-  - name: Debug log
+  - name: Deploy Helm Chart
+    helm:
+      host: "localhost"
+      chart:
+        name: "{{ chart_name }}"
+        version: "{{ chart_version }}"
+        source:
+          type: "repo"
+          location: "{{ chart_repo }}"
+          path: "{{ chart_path }}"
+      state: present
+      name: "{{ deployment_name }}"
+      namespace: "{{ kube_namespace }}"
     environment:
       SSL_CERT_DIR: /usr/lib/ssl/certs
       SSL_CERT_FILE: /usr/lib/ssl/certs/ca-certificates.crt
-    debug:
-      msg: "{{ lookup('env','SSL_CERT_DIR') }} {{ lookup('env','SSL_CERT_FILE') }} is SSL CERT DIR"
+
+  # - name: Debug log
+  #   environment:
+  #     SSL_CERT_DIR: /usr/lib/ssl/certs
+  #     SSL_CERT_FILE: /usr/lib/ssl/certs/ca-certificates.crt
+  #   debug:
+  #     msg: "{{ lookup('env','SSL_CERT_DIR') }} {{ lookup('env','SSL_CERT_FILE') }} is SSL CERT DIR"
