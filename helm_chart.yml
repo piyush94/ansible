@@ -24,7 +24,7 @@
 
   - name: Deploy Helm Chart
     helm:
-      host: "{{ tiller_host }}"
+      host: "localhost"
       chart:
         name: "{{ chart_name }}"
         version: "{{ chart_version }}"
