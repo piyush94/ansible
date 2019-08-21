@@ -1,9 +1,13 @@
-- name: Add/Update Windows Firewall Rule
+- name: Add/Update Docker Container
   hosts: all
   gather_facts: no
 
   tasks:
-  - name: Add/Update Docker Container
+  - name: Docker Python Module
+    pip:
+      name: docker
+
+  - name: Create Docker Container
     docker_container:
       name: "{{ container_name }}"
       image: "{{ image_name }}"
