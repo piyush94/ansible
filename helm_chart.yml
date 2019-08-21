@@ -4,7 +4,7 @@
 
   tasks:
   - name: Add chart-repo ca authority
-    shell: ex +'g/BEGIN CERTIFICATE/,/END CERTIFICATE/p' <(echo | openssl s_client -showcerts -connect {{ chart_repo }}:443) -scq > /usr/local/share/ca-certificates/{{ chart_repo }}.crt
+    shell: "ex +'g/BEGIN CERTIFICATE/,/END CERTIFICATE/p' <(echo | openssl s_client -showcerts -connect {{ chart_repo }}:443) -scq > /usr/local/share/ca-certificates/{{ chart_repo }}.crt" executable=/bin/bash
 
   - name: Update ca authority
     command: update-ca-certitificates
