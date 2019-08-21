@@ -3,6 +3,25 @@
   gather_facts: no
 
   tasks:
+  - name: Install EPEL Release and python-pip
+    yum:
+      name:
+        - https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+        - python-pip
+      enablerepo: "*"
+      state: present
+    when: ansible_facts['os_family'] == "RedHat"
+
+  - name: Install python-pip
+    apt:
+      name: python-pip
+      state: present
+    when: ansible_facts['os_family'] == "Debian"
+
+  - name: Helm Python Module
+    pip:
+      name: pyhelm
+
   - name: Deploy Helm Chart
     helm:
       host: "{{ tiller_host }}"
