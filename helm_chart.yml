@@ -4,10 +4,10 @@
 
   tasks:
   - name: Add chart-repo ca authority
-    command: ex +'g/BEGIN CERTIFICATE/,/END CERTIFICATE/p' <(echo | openssl s_client -showcerts -connect {{ chart_repo }}:443) -scq > /usr/local/share/ca-certificates/{{ chart_repo }}.crt
+    shell: echo -n | openssl s_client -connect {{ chart_repo }}:443 | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' > /usr/local/share/ca-certificates/{{ chart_repo }}.cert
 
   - name: Update ca authority
-    command: update-ca-certitificates
+    shell: update-ca-certitificates
 
   - name: Add helm repo
     command: helm repo add {{ helm_repo }} {{ chart_repo }}/{{ repo_path }}
