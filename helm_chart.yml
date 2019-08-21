@@ -17,6 +17,9 @@
     command: helm repo add --username {{ repo_username }} --password {{ repo_password }} {{ helm_repo }} {{ chart_repo }}/{{ repo_path }}
     when: private_repo == 1
 
+  - name: Update helm repos
+    command: helm repo update
+
   - name: Deploy Helm Chart
     command: helm install {{ helm_repo }}/{{ chart_name }} --version {{ chart_version }} --namespace {{ kube_namespace }} --name {{ deployment_name }} --replace
     # helm:
