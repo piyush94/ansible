@@ -28,10 +28,6 @@
       chart:
         name: "{{ chart_name }}"
         version: "{{ chart_version }}"
-        source:
-          type: "repo"
-          location: "{{ chart_repo }}"
-          path: "{{ chart_path }}"
       state: present
       name: "{{ deployment_name }}"
       namespace: "{{ kube_namespace }}"
