@@ -15,7 +15,7 @@
   - name: Copy kubeconfig
     command: mkdir ~/.kube
     command: touch ~/.kube/config
-    shell: echo "{{ KUBE_CONFIG }}" > ~/.kube/config
+    shell: echo "{{ kube_config }}" > ~/.kube/config
 
   - name: Helm init
     command: helm init --client-only
