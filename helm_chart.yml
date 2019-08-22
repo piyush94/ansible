@@ -21,7 +21,7 @@
     command: helm repo update
 
   - name: Deploy Helm Chart
-    command: helm install {{ helm_repo }}/{{ chart_name }} --version {{ chart_version }} --namespace {{ kube_namespace }} --name {{ deployment_name }} --replace
+    command: helm upgrade --install {{ deployment_name }} {{ helm_repo }}/{{ chart_name }} --version {{ chart_version }} --namespace {{ kube_namespace }}
     # helm:
     #   host: "{{ tiller_host }}"
     #   chart:
