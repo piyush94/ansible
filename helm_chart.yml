@@ -14,14 +14,22 @@
       warn: no
 
   - name: Create kubeconfig
-    shell: |
-      mkdir ~/.kube
-      touch ~/.kube/config
+    file:
+      path: ~/.kube
+      state: directory
+    file:
+      path: ~/.kube/config
+      state: touch
+      mode: '0755'
+    # shell: |
+    #   mkdir ~/.kube
+    #   touch ~/.kube/config
 
   - name: Copy kubeconfig
     copy:
-      remote_src: "{{ kube_config }}"
+      src: "{{ kube_config }}"
       dest: ~/.kube/config
+      remote_src: yes
 
   - name: Helm init
     command: helm init --client-only
