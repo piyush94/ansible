@@ -20,9 +20,8 @@
 
   - name: Copy kubeconfig
     copy:
-      src: {{ kube_config }}
+      src: "{{ kube_config }}"
       dest: ~/.kube/config
-      # content: "{{ kube_config }}"
 
   - name: Helm init
     command: helm init --client-only
