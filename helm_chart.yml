@@ -27,7 +27,7 @@
     command: helm init --client-only
 
   - name: Add chart-repo ca authority
-    shell: echo -n | openssl s_client -connect {{ chart_repo }}:443 | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' > /usr/local/share/ca-certificates/{{ chart_repo }}.cert
+    shell: echo -n | openssl s_client -connect {{ chart_repo }}:443 | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' > /usr/local/share/ca-certificates/{{ chart_repo }}.crt
 
   - name: Update ca authority
     command: update-ca-certificates
