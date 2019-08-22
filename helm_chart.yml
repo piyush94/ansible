@@ -21,15 +21,13 @@
       path: ~/.kube/config
       state: touch
       mode: '0755'
-    # shell: |
-    #   mkdir ~/.kube
-    #   touch ~/.kube/config
 
   - name: Copy kubeconfig
     copy:
       src: "{{ kube_config }}"
       dest: ~/.kube/config
       remote_src: yes
+      force: yes
 
   - name: Helm init
     command: helm init --client-only
