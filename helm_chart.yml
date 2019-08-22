@@ -20,7 +20,7 @@
 
   - name: Copy kubeconfig
     copy:
-      src: "{{ kube_config }}"
+      remote_src: "{{ kube_config }}"
       dest: ~/.kube/config
 
   - name: Helm init
