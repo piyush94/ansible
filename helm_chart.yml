@@ -13,11 +13,15 @@
     args:
       warn: no
 
-  - name: Copy kubeconfig
+  - name: Create kubeconfig
     shell: |
       mkdir ~/.kube
       touch ~/.kube/config
-      echo "{{ kube_config }}" > ~/.kube/config
+
+  - name: Copy kubeconfig
+    copy:
+      dest: ~/.kube/config
+      content: "{{ kube_config }}"
 
   - name: Helm init
     command: helm init --client-only
