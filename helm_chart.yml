@@ -42,6 +42,8 @@
     shell: help repo list | grep {{ helm_repo }} | wc -l
     register: repocount
 
+  - debug: msg="repocount:{{ repocount.stdout }}"
+
   - name: Add helm repo
     command: helm repo add {{ helm_repo }} https://{{ chart_repo }}/{{ repo_path }}
     when: private_repo == 0 and repocount.stdout == 0
