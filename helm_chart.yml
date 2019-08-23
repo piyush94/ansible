@@ -38,13 +38,17 @@
   - name: Update ca authority
     command: update-ca-certificates
 
+  - name: Check helm repo
+    shell: help repo list | grep {{ helm_repo }} | wc -l
+    register: repocount
+
   - name: Add helm repo
     command: helm repo add {{ helm_repo }} https://{{ chart_repo }}/{{ repo_path }}
-    when: private_repo == 0
+    when: private_repo == 0 and repocount.stdout == 0
 
   - name: Add helm repo
     command: helm repo add --username {{ repo_username }} --password {{ repo_password }} {{ helm_repo }} https://{{ chart_repo }}/{{ repo_path }}
-    when: private_repo == 1
+    when: private_repo == 1 and repocount.stdout == 0
 
   - name: Update helm repos
     command: helm repo update
