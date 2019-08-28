@@ -51,7 +51,7 @@
     when: private_repo == 0
 
   - name: Add helm repo
-    command: helm repo add --username {{ repo_username }} --password {{ repo_password }} {{ helm_repo }} https://{{ chart_repo }}/{{ repo_path }}
+    command: helm repo add --username {{ repouser }} --password {{ repopass }} {{ helm_repo }} https://{{ chart_repo }}/{{ repo_path }}
     when: private_repo == 1
 
   - name: Update helm repos
