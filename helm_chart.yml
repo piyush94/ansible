@@ -41,18 +41,18 @@
     command: update-ca-certificates
 
   - name: Check helm repo
-    shell: helm repo list | grep {{ helm_repo }} | wc -l
+    command: helm repo list | grep {{ helm_repo }} | wc -l
     register: repocount
 
   - debug: msg="repocount:{{ repocount.stdout }}"
 
   - name: Add helm repo
     command: helm repo add {{ helm_repo }} https://{{ chart_repo }}/{{ repo_path }}
-    when: private_repo == 0 and repocount.stdout == 0
+    when: private_repo == 0 and repocount.stdout == "0"
 
   - name: Add helm repo
     command: helm repo add --username {{ repo_username }} --password {{ repo_password }} {{ helm_repo }} https://{{ chart_repo }}/{{ repo_path }}
-    when: private_repo == 1 and repocount.stdout == 0
+    when: private_repo == 1 and repocount.stdout == "0"
 
   - name: Update helm repos
     command: helm repo update
