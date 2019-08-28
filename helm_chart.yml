@@ -50,7 +50,7 @@
     command: helm repo add {{ helm_repo }} https://{{ chart_repo }}/{{ repo_path }}
     when: private_repo == 0
 
-  - name: Add helm repo
+  - name: Add private helm repo
     command: helm repo add --username {{ repouser }} --password {{ repopass }} {{ helm_repo }} https://{{ chart_repo }}/{{ repo_path }}
     when: private_repo == 1
 
