@@ -17,6 +17,8 @@
     file:
       path: ~/.kube
       state: directory
+
+  - name: Create kubeconfig file
     file:
       path: ~/.kube/config
       state: touch
