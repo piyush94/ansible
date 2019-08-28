@@ -56,7 +56,7 @@
     command: helm repo update
 
   - name: Deploy Helm Chart
-    command: helm upgrade --install {{ deployment_name }} {{ helm_repo }}/{{ chart_name }} --version {{ chart_version }} --namespace {{ kube_namespace }}
+    command: helm upgrade --install {{ deployment_name }} {{ helm_repo }}/{{ chart_name }} --version {{ chart_version }} --namespace {{ kube_namespace }} --force
     register: helm_output
 
   - debug: msg="Helm Output:\n{{ helm_output.stdout }}"
