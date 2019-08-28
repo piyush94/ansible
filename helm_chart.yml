@@ -39,7 +39,7 @@
     command: update-ca-certificates
 
   - name: Check helm repo
-    shell: help repo list | grep {{ helm_repo }} | wc -l
+    command: help repo list | grep {{ helm_repo }} | wc -l
     register: repocount
 
   - debug: msg="repocount:{{ repocount.stdout }}"
