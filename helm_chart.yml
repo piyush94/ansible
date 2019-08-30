@@ -61,9 +61,9 @@
     command: helm upgrade --install {{ deployment_name }} {{ helm_repo }}/{{ chart_name }} --version {{ chart_version }} --namespace {{ kube_namespace }} --force
     register: helm_output
 
-  - debug: msg="Helm Output:\n{{ helm_output.stdout }}"
+  - debug: msg="Helm Output:\n{{ helm_output.stdout.split('\n')[:-1] }}"
 
-  - debug: msg="Helm Error:\n{{ helm_output.stderr }}"
+  - debug: msg="Helm Error:\n{{ helm_output.stderr.split('\n')[:-1] }}"
     # helm:
     #   host: "{{ tiller_host }}"
     #   chart:
