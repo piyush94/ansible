@@ -58,7 +58,7 @@
     command: helm repo update
 
   - name: Deploy Helm Chart
-    command: helm upgrade --install {{ deployment_name }} {{ helm_repo }}/{{ chart_name }} --version {{ chart_version }} --namespace {{ kube_namespace }} --force
+    command: helm upgrade --install {{ deployment_name }} {{ helm_repo }}/{{ chart_name }} --version {{ chart_version }} --namespace {{ kube_namespace }} --force --recreate-pods
     register: helm_output
 
   - debug: msg={{ helm_output.stdout.split('\n') }}
